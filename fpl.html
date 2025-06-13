@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fantasy Team Fixer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="bg-black text-white">
+
+  <!-- Back Button -->
+  <div class="p-4">
+    <a href="index.html" class="bg-red-600 text-black font-bold px-4 py-2 rounded-full shadow-md hover:bg-red-700">
+      ← Back to Portfolio
+    </a>
+  </div>
+
+  <!-- Header -->
+  <div class="text-center mt-6 mb-10">
+    <h1 class="text-4xl font-bold text-red-500 tracking-wider">FPL Team Fixer</h1>
+    <p id="gameweek" class="text-md text-cyan-400 mt-1 mb-4">Loading Gameweek...</p>
+    <p class="text-sm text-gray-300 mb-6">Live Fantasy Premier League Data + Predictive Analysis</p>
+    <div class="text-center text-xl text-red-400 font-semibold mb-6">Top Picks for This Gameweek</div>
+  </div>
+
+  <!-- Top Picks -->
+  <section id="top-picks" class="px-6 max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-20">
+    <div class="text-center text-gray-400 col-span-full animate-pulse">Loading top picks...</div>
+  </section>
+
+  <!-- Scripts -->
+<!-- Scripts -->
+<script>
+  // Gameweek Dropdown Logic
+  function createGWDropdown(currentGW) {
+    const header = document.querySelector('h1');
+    const dropdown = document.createElement('select');
+    dropdown.id = 'gw-selector';
+    dropdown.className = 'bg-gray-900 text-white border border-red-500 rounded px-3 py-1 text-sm ml-2';
+
+    for (let i = 1; i <= 38; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = `GW ${i}`;
+      if (i === currentGW) option.selected = true;
+      dropdown.appendChild(option);
+    }
+
+    dropdown.addEventListener('change', () => {
+      const selectedGW = parseInt(dropdown.value);
+      fetchTopPicks(selectedGW);
+      document.getElementById('gameweek').innerText = `Showing predictions for Gameweek ${selectedGW}`;
+    });
+
+    // Insert dropdown after H1
+    header.insertAdjacentElement('afterend', dropdown);
+  }
+
+  // Load current gameweek and init dropdown
+  async function fetchGameweek() {
+    try {
+      const res = await fetch('https://fpl-api-6qzr.onrender.com/gameweek');
+      const data = await res.json();
+      const currentGW = data.gameweek;
+
+      document.getElementById('gameweek').innerText = `We are currently in Gameweek ${currentGW}`;
+      createGWDropdown(currentGW);
+      fetchTopPicks(currentGW);
+    } catch {
+      document.getElementById('gameweek').innerText = 'Failed to load Gameweek info';
+      fetchTopPicks(38); // fallback
+    }
+  }
+
+  // Fetch top picks by GW
+  async function fetchTopPicks(gw) {
+    const container = document.getElementById('top-picks');
+    container.innerHTML = '<p class="text-center col-span-full text-gray-400 animate-pulse">Loading top picks...</p>';
+
+    try {
+      const res = await fetch(`https://fpl-api-6qzr.onrender.com/top-picks?gw=${gw}`);
+      const data = await res.json();
+      container.innerHTML = '';
+
+      if (!data.length) {
+        container.innerHTML = '<p class="text-center col-span-full text-gray-400">No top picks available at the moment.</p>';
+        return;
+      }
+
+      data.forEach(player => {
+        const card = `
+          <div class="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-red-600 transition-all">
+            <h2 class="text-xl font-bold text-red-400 mb-1">${player.name}</h2>
+            <p class="text-sm text-gray-300 mb-1">Position: <span class="text-white">${player.position}</span></p>
+            <p class="text-sm mb-1">Team: <span class="text-white">${player.team}</span></p>
+            <p class="text-sm mb-1">Opponent: <span class="text-white">${player.opponent}</span></p>
+            <p class="text-sm mb-1">Form: <span class="text-green-400">${player.form}</span> | P.E : <span class="text-yellow-300 font-bold">${player.pe}</span></p>
+            <p class="text-sm mb-1">Total Points: ${player.points}</p>
+            <p class="text-sm">Price: £${player.price}m</p>
+          </div>
+        `;
+        container.innerHTML += card;
+      });
+    } catch {
+      container.innerHTML = '<p class="text-center col-span-full text-red-500">Failed to load top picks.</p>';
+    }
+  }
+
+  // Init
+  fetchGameweek();
+</script>
+
+</body>
+</html>

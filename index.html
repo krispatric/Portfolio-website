@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kris Jesudas | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<!-- FPL Button Dropdown -->
+<div class="fixed top-10 right-4 z-50">
+  <div class="relative group">
+    <button class="bg-red-600 hover:bg-red-700 text-black font-bold py-2 px-4 rounded-full shadow-md">
+      Fantasy Tools
+    </button>
+    <div class="absolute right-0 mt-2 w-48 bg-gray-900 border border-red-600 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <a href="fpl.html" class="block px-4 py-2 text-sm text-white hover:bg-red-700">Time to fix our team</a>
+    </div>
+  </div>
+</div>
+
+<body class="bg-black text-white scroll-smooth relative">
+    
+<div id="boot-console" class="fixed inset-0 z-50 bg-black text-green-400 font-mono p-8 text-sm">
+  <p>> Initializing core modules...</p>
+  <p>> Power routing complete...</p>
+  <p>> KGPT interface online.</p>
+  <p>> Welcome to the world of Kris Patrick Maame</p>
+</div>
+<!-- Interest Header -->
+<div id="interest-header" class="fixed top-0 left-0 w-full bg-black text-red-500 text-center py-2 text-sm z-50 font-mono shadow-md" style="text-shadow: 0 0 5px red;">
+  Ooh, someone's interested.
+</div>
+
+<!-- Particle Background -->
+<canvas id="particles-bg" class="fixed inset-0 z-[-1] pointer-events-none"></canvas>
+
+<!-- Matrix Rain Background -->
+<canvas id="matrix-rain" class="fixed inset-0 z-[-2] pointer-events-none opacity-20"></canvas>
+
+
+<!-- Beam Sweep -->
+<div class="beam"></div>
+
+  <!-- Global HUD Ring Background -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+    <img src="assets/svg/hud-ring.svg"
+         class="absolute top-1/2 left-1/2 w-[900px] h-[900px] -translate-x-1/2 -translate-y-1/2 animate-spin-slow opacity-10"
+         style="filter: drop-shadow(0 0 10px rgb(252, 60, 60));" />
+  </div>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative z-10 h-screen flex flex-col justify-center items-center text-center overflow-hidden">
+    <h1 class="text-5xl font-bold mb-4 text-white" id="hero-title" style="text-shadow: 0 0 10px red, 0 0 20px red;">Loading...</h1>
+    <p class="text-xl mb-8">Software Developer | AI Tinkerer | Creative Technologist</p>
+    <a class="glitch px-6 py-2 rounded-full bg-red-600 hover:bg-red-700 text-black font-bold shadow-md"
+        data-text="See My Work"
+        href="#projects">
+        See My Work
+    </a>
+<!-- Radar Ping -->
+<div class="fixed inset-0 z-0 pointer-events-none" id="radar">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px]">
+    <div class="radar-ping"></div>
+    <div class="radar-ping delay-1"></div>
+    <div class="radar-ping delay-2"></div>
+  </div>
+</div>
+
+    <!-- SVG Draw Logo -->
+    <div class="mt-6" id="logo-draw">
+      <svg viewBox="0 0 300 100" class="w-64 h-24 stroke-red-500 fill-none">
+        <path d="M10 80 Q 95 10 180 80 T 290 80" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6 text-red-500 tracking-widest uppercase">About Me</h2>
+    <p class="text-lg leading-relaxed">
+      An aspiring security-focused researcher and developer with a robust foundation in full-stack software 
+engineering, AI integration, and system architecture. Experienced in building secure, data-intensive 
+applications using Python, React, Node.js, Power Platform, and Google Cloud APIs. 
+    </p>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold mb-10 text-center text-red-500 tracking-widest uppercase">Projects</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <!-- Project Card 1 -->
+      <div class="project-card bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-red-700 transition-transform transform hover:-translate-y-2">
+        <div class="w-full h-1 bg-red-600 mb-3 animate-pulse"></div>
+        <h3 class="text-xl font-semibold mb-2">AdGPT</h3>
+        <p>AI-powered ad campaign tool with Google Ads integration and so much more(private-for now).</p>
+        
+      </div>
+
+      <!-- Project Card 2 -->
+      <div class="project-card bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-red-700 transition-transform transform hover:-translate-y-2">
+        <div class="w-full h-1 bg-red-600 mb-3 animate-pulse"></div>
+        <h3 class="text-xl font-semibold mb-2">Binary-Sentiment-Analysis</h3>
+        <p>The code provided implements a machine learning model using the TensorFlow and Keras libraries to distinguish movie reviews</p>
+        <a href="https://github.com/krispatric/Binary-Sentiment-Analysis" target="_blank" class="text-red-400 underline block mt-2">
+    View Repository
+    </a>
+
+      </div>
+            <div class="project-card bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-red-700 transition-transform transform hover:-translate-y-2">
+        <div class="w-full h-1 bg-red-600 mb-3 animate-pulse"></div>
+        <h3 class="text-xl font-semibold mb-2">Face-detection</h3>
+        <p>A face detection system in Python using AI. </p>
+        <a href="https://github.com/krispatric/Face-detection" target="_blank" class="text-red-400 underline block mt-2">
+  View Repository
+</a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="py-20 px-6 max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6 text-red-500 tracking-widest uppercase">Experience</h2>
+    <ul class="space-y-4">
+      <li>
+        <h4 class="font-semibold">Backend Developer @ Adcasa (2024–Present)</h4>
+        <p class="text-sm">Built and deployed Google Ads + Firebase powered systems.</p>
+      </li>
+      <li>
+        <h4 class="font-semibold">Solutions Developer @ Acies Innovations</h4>
+        <p class="text-sm">Developed Power Platform solutions and dashboards.</p>
+      </li>
+        <li>
+        <h4 class="font-semibold">Full Stack Developer @ IMoves</h4>
+        <p class="text-sm">Developed a Multi-User Gyming Application using ReactNative and Node.js</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6 max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-4 text-red-500 tracking-widest uppercase">Get in Touch</h2>
+    <p class="mb-6">Feel free to reach out for collaborations or just a friendly hello 👋</p>
+    <a href="mailto:kris.patrick6885@gmail.com" class="text-red-400 underline">kris.patrick6885@gmail.com</a>
+  </section>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
